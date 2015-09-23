@@ -48,6 +48,7 @@
                                         :output-dir    "resources/public/js/out"
                                         :asset-path   "js/out"
                                         :optimizations :none
+                                        :static-fns true
                                         :pretty-print  true}}}}
 
   :profiles {:dev {:repl-options {:init-ns kiooform.repl
@@ -77,6 +78,7 @@
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
                                               :compiler {:main "kiooform.dev"
+                                                         :static-fns true
                                                          :source-map true}}
 }
 }}
@@ -90,4 +92,5 @@
                                              {:source-paths ["env/prod/cljs"]
                                               :compiler
                                               {:optimizations :advanced
+                                               :static-fns true
                                                :pretty-print false}}}}}})
