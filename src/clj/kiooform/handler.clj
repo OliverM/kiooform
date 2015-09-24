@@ -17,6 +17,7 @@
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
      [:div#app]
+     (include-js "js/inc.js")
      (include-js "js/app.js")]]))
 
 (defroutes routes
