@@ -17,8 +17,8 @@
      (include-css (if (env :dev) "css/site.css" "css/site.min.css"))]
     [:body
      [:div#app]
-     (include-js "js/inc.js")
-     (include-js "js/app.js")]]))
+     (include-js "js/app.js")
+     (include-js "js/inc.js")]]))
 
 (defroutes routes
   (GET "/" [] home-page)

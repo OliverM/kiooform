@@ -4,13 +4,7 @@
               [hickory.core :as h])
     (:require-macros [kioo.reagent :refer [defsnippet deftemplate]]))
 
-;; try parsing html via hickory then inserting into reagent component
-(defn h-test []
-  (->> "<div class=\"outcomes\">\n    <h2>Outcomes</h2>\n    <form>\n        <fieldset>\n            <legend>Outcomes assessment</legend>\n            <div>\n                <div>\n                    <label for=\"outcomescompletiondate\">Outcomes for month ending</label>\n                    <input id=\"outcomescompletiondate\" type=\"date\">\n                </div>\n            </div>\n        </fieldset>\n    </form>\n</div>"
-      h/parse-fragment
-      (map h/as-hiccup)
-       first
-       ))
+(def collapsible (reagent/adapt-react-class "CommentBox"))
 
 ;; problematic kioo-generated component takes a long time to appear in the page
 (deftemplate minform "minform.html" [])
@@ -21,10 +15,11 @@
    [:p "Just checking all this plumbing "
     [:i "works"] "."]
    [:p
-    [:span {:style {:color "red"}} "Red."]]])
+    [:span {:style {:color "red"}} "Red."]]
+   [collapsible #js {:comment "I'm a plain React component"}]])
 
 (defn mount-root []
-  (reagent/render-component [h-test]
+  (reagent/render-component [minform]
                             (.getElementById js/document "app")))
 
 (defn init! []

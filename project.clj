@@ -79,9 +79,7 @@
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
                                               :compiler {:main "kiooform.dev"
                                                          :static-fns true
-                                                         :source-map true}}
-}
-}}
+                                                         :source-map true}}}}}
 
              :uberjar {:hooks [leiningen.cljsbuild minify-assets.plugin/hooks]
                        :env {:production true}
