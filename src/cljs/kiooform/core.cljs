@@ -6,8 +6,9 @@
 
 (def collapsible (reagent/adapt-react-class "CommentBox"))
 
-;; problematic kioo-generated component takes a long time to appear in the page
-(deftemplate minform "minform.html" [])
+(deftemplate minform "minform.html" []
+             {[:div#c-target] (k/content [collapsible #js {:comment "I'm a plain React component"}])
+              })
 
 ;; test reagent component to insert in render-component call below
 (defn p-test []
