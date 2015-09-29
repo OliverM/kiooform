@@ -7,7 +7,7 @@
 (def collapsible (reagent/adapt-react-class "CommentBox"))
 
 (deftemplate minform "minform.html" []
-             {[:div#c-target] (k/content [collapsible #js {:comment "I'm a plain React component"}])
+             {[:div#c-target] (k/wrap collapsible #js {:comment "I'm a plain React component"})
               })
 
 ;; test reagent component to insert in render-component call below
