@@ -16,5 +16,6 @@
 
 (defn collapsible [children]
   [:div
-   (for [{:keys [title content]} children]
-     [collItem title content])])
+   (map-indexed
+     (fn [i {:keys [title content]}] ^{:key i} [collItem title content])
+     children)])
