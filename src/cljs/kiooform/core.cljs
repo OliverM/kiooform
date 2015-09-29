@@ -1,23 +1,17 @@
 (ns kiooform.core
     (:require [kioo.reagent :as k]
               [reagent.core :as reagent :refer [atom]]
-              [hickory.core :as h])
+              [kiooform.collapsible :refer [collapsible]]
+              )
     (:require-macros [kioo.reagent :refer [defsnippet deftemplate]]))
 
-(def collapsible (reagent/adapt-react-class "CommentBox"))
+(def collapsible-data [{:title "Title 1" :content [:p "First piece of content."]}
+                       {:title "Title 2" :content [:p "Second piece of content."]}
+                       {:title "Title 3" :content [:p "Third piece of content."]}])
 
 (deftemplate minform "minform.html" []
-             {[:div#c-target] (k/wrap collapsible #js {:comment "I'm a plain React component"})
+             {[:div#c-target] (k/content [collapsible collapsible-data])
               })
-
-;; test reagent component to insert in render-component call below
-(defn p-test []
-  [:div
-   [:p "Just checking all this plumbing "
-    [:i "works"] "."]
-   [:p
-    [:span {:style {:color "red"}} "Red."]]
-   [collapsible #js {:comment "I'm a plain React component"}]])
 
 (defn mount-root []
   (reagent/render-component [minform]
