@@ -1,18 +1,25 @@
 (ns kiooform.collapsible
   (:require [reagent.core :as r :refer [atom]]))
 
-(defn collItemTitle [text]
-  [:h3 {:style {:cursor "pointer" :margin 0}} text])
+(enable-console-print!)
 
-(defn collItemBody [content]
-  [:div {:style {}}
+(defn collItemTitle [text visible]
+  [:h3
+   {:style    {:cursor "pointer" :margin 0}
+    :on-click #(do (swap! visible not)
+                   (-> % .stopPropagation))} text])
+
+(defn collItemBody [content visible]
+  [:div {:style {:max-height (if (= @visible true) "100%" "0px")
+                 :overflow (if (= @visible true) "visible" "hidden")}}
    [:div {:className "CIB-wrapper"}
     content]])
 
 (defn collItem [title content]
-  [:div
-   [collItemTitle title]
-   [collItemBody content]])
+  (let [visible (atom false)]
+    [:div
+     [collItemTitle title visible]
+     [collItemBody content visible]]))
 
 (defn collapsible [children]
   [:div
